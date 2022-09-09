@@ -12,3 +12,7 @@ exploratory design of novel layouts and sketch-based layout retrieval, and test 
 these two applications are confirmed by the user feedback and the extensive results. We will release the code of this work upon acceptance of the paper.
 
 ## Layout Blending Results:
+![image](https://github.com/lyf7115/LayoutBlending/blob/main/Images/teaser.png)
+
+## Interface:
+![image](https://github.com/lyf7115/LayoutBlending/blob/main/Images/BlendingVideo.gif)
