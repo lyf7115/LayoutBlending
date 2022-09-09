@@ -26,3 +26,12 @@ these two applications are confirmed by the user feedback and the extensive resu
 ### Third Party Library:
 
 - [Eigen3](http://eigen.tuxfamily.org/)
+
+### Citation
+
+If you find this useful for your research, please cite the following paper.
+
+```
+Waiting for updating...
+```
+
