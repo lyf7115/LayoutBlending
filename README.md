@@ -9,10 +9,20 @@ compound structure helps extract intermediate layout structures, from which blen
 The correspondence also defines a similarity measure between layouts in a hierarchically structured view. Our method provides a new way for novel
 layout creation. The introduced structural similarity measure regularizes the layouts in a hyperspace. We demonstrate two applications in this paper, i.e.,
 exploratory design of novel layouts and sketch-based layout retrieval, and test them on a magazine layout dataset. The effectiveness and feasibility of
-these two applications are confirmed by the user feedback and the extensive results. We will release the code of this work upon acceptance of the paper.
+these two applications are confirmed by the user feedback and the extensive results.
 
 ## Layout Blending Results:
 ![image](https://github.com/lyf7115/LayoutBlending/blob/main/Images/teaser.png)
 
 ## Interface:
 ![image](https://github.com/lyf7115/LayoutBlending/blob/main/Images/BlendingVideo.gif)
+
+## Code:
+
+### Prerequisites:
+
+- Environments: Windows10 system, Visual Studio 2017, Qt 5.9.1 are required.
+
+### Third Party Library:
+
+- [Eigen3](http://eigen.tuxfamily.org/)
