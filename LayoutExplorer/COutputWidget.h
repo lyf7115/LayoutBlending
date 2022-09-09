@@ -12,13 +12,14 @@ class OutputWidget : public QWidget
 	Q_OBJECT
 
 public:
-	OutputWidget();
+	OutputWidget(QWidget *parent);
 	~OutputWidget();
 
 	void paintEvent(QPaintEvent* event);
 
 public:
 	CompoundNode* output_widget_tree;
+	bool draw_layout_state;	
 
 private:
 	void DrawGrid(QPainter& paint);

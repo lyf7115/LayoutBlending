@@ -8,7 +8,7 @@ class SliderWidget : public QWidget
 	Q_OBJECT
 
 public:
-	SliderWidget();
+	SliderWidget(QWidget* parent);
 	~SliderWidget();
 
 	void paintEvent(QPaintEvent* event);

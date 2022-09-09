@@ -33,34 +33,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CHungarianAlgorithm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_MainWindow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CLayoutTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CNodeMatching.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CCompoundNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CTransfer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CQuadraticProgramming.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CCompoundTree.cpp">
+    <ClCompile Include="LayoutExplorer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="COutputWidget.cpp">
@@ -69,12 +42,33 @@
     <ClCompile Include="CSliderWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CCompoundNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CCompoundTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CHungarianAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayoutTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CNodeMatching.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="CQFloatSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CQuadraticProgramming.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransfer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MainWindow.h">
+    <QtMoc Include="LayoutExplorer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="COutputWidget.h">
@@ -88,24 +82,24 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="MainWindow.ui">
+    <QtUic Include="LayoutExplorer.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="MainWindow.qrc">
+    <QtRcc Include="LayoutExplorer.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="CCompoundNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCompoundTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CHungarianAlgorithm.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
-      <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="CLayoutTree.h">
       <Filter>Header Files</Filter>
@@ -116,16 +110,10 @@
     <ClInclude Include="CNodeMatching.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CCompoundNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CTransfer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CQuadraticProgramming.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CCompoundTree.h">
+    <ClInclude Include="CTransfer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

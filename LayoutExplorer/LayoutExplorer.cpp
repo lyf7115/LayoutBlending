@@ -1,10 +1,8 @@
-#include "MainWindow.h"
-#include <algorithm>
-#include <QHBoxLayout>
+#include "LayoutExplorer.h"
 
-MainWindow::MainWindow(QWidget *parent)
+LayoutExplorer::LayoutExplorer(QWidget *parent)
 	: QMainWindow(parent)
-{	
+{
 	ui.setupUi(this);
 
 	m_firstLayout = nullptr;
@@ -18,13 +16,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 	ui.horizontalSlider->setRange(0.0, 1.02);
 
-	connect(ui.horizontalSlider, &QSlider::sliderMoved, this, &MainWindow::MovedAndCreate);
-	connect(ui.horizontalSlider, &QSlider::sliderMoved, this, &MainWindow::OutputWidgetRedraw);
-
-	//setGeometry(600, 200, 600, 750);
+	connect(ui.horizontalSlider, &QSlider::sliderMoved, this, &LayoutExplorer::MovedAndCreate);
+	connect(ui.horizontalSlider, &QSlider::sliderMoved, this, &LayoutExplorer::OutputWidgetRedraw);
 }
 
-MainWindow::~MainWindow()
+LayoutExplorer::~LayoutExplorer()
 {
 	if (m_firstLayout != nullptr)
 	{
@@ -51,13 +47,13 @@ MainWindow::~MainWindow()
 	}
 }
 
-void MainWindow::OutputWidgetRedraw() 
+void LayoutExplorer::OutputWidgetRedraw()
 {
 	//active paintEvent，repaint
-	ui.output_widget->repaint(); 
+	ui.output_widget->repaint();
 }
 
-void MainWindow::OpenNextLayout()
+void LayoutExplorer::OpenNextLayout()
 {
 	static const QString defaultPath("DEFAULT_LAYOUT_FILE_PATH");
 	QSettings thisSetting;
@@ -71,6 +67,7 @@ void MainWindow::OpenNextLayout()
 	{
 		if (m_uploadLayout.size() == 2)
 		{
+			ui.output_widget->draw_layout_state = false;
 			for (int i = 0; i < 2; i++)
 			{
 				if (m_uploadLayout[i] != nullptr)
@@ -95,7 +92,7 @@ void MainWindow::OpenNextLayout()
 	return;
 }
 
-void MainWindow::Compute()
+void LayoutExplorer::Compute()
 {
 	if (m_uploadLayout.size() == 2)
 	{
@@ -124,7 +121,7 @@ void MainWindow::Compute()
 	}
 }
 
-void MainWindow::MovedAndCreate()
+void LayoutExplorer::MovedAndCreate()
 {
 	if (comb_tree_root == nullptr)
 	{
@@ -135,12 +132,14 @@ void MainWindow::MovedAndCreate()
 	DeterInterVar(ui.horizontalSlider->value());
 	layout_handler.TransferAndSolve(ui.horizontalSlider->value());
 	SetCompoundNodeLabel();
+
+	ui.output_widget->draw_layout_state = true;
 	ui.output_widget->output_widget_tree = comb_tree_root_copy;
 
 	return;
 }
 
-void MainWindow::BatchCreateLay()
+void LayoutExplorer::BatchCreateLay()
 {
 	/*for (int i = 0;i <= 100;i++)
 	{
@@ -162,8 +161,8 @@ void MainWindow::BatchCreateLay()
 		SaveGenerLayoutForBatch(i);
 	}*/
 
-	std::vector<double> input_coefficient = {0.0,0.25,0.5,0.75,1.0};
-	for (int i = 0;i < input_coefficient.size(); i++)
+	std::vector<double> input_coefficient = { 0.0,0.25,0.5,0.75,1.0 };
+	for (int i = 0; i < input_coefficient.size(); i++)
 	{
 		double slider_val = input_coefficient[i];
 		CopyTree();
@@ -179,8 +178,8 @@ void MainWindow::BatchCreateLay()
 	return;
 }
 
-void MainWindow::SaveGenerLayout()
-{	
+void LayoutExplorer::SaveGenerLayout()
+{
 	std::vector<int> transfer_index;
 
 	transfer_index.resize(500, 0);
@@ -192,7 +191,7 @@ void MainWindow::SaveGenerLayout()
 	std::fstream File_output;
 	File_output.open(fileName.toStdString(), std::fstream::out);
 	File_output << "node attribute" << std::endl;
-	
+
 	CompoundNode* root_display_layout = comb_tree_root_copy;
 	int node_number = 0, equal_size_number = 0, equal_space_number = 0, left_align_number = 0, right_align_number = 0, top_align_number = 0, bottom_align_number = 0;
 
@@ -214,11 +213,11 @@ void MainWindow::SaveGenerLayout()
 			}
 			if (node->left_align_node.size() >= 2)
 			{
-				left_align_number ++;
+				left_align_number++;
 			}
 			if (node->right_align_node.size() >= 2)
 			{
-				right_align_number ++;
+				right_align_number++;
 			}
 			if (node->top_align_node.size() >= 2)
 			{
@@ -227,7 +226,7 @@ void MainWindow::SaveGenerLayout()
 			if (node->bottom_align_node.size() >= 2)
 			{
 				bottom_align_number++;
-			}			
+			}
 
 			transfer_index[node->index] = index_counter;
 			index_counter++;
@@ -247,16 +246,16 @@ void MainWindow::SaveGenerLayout()
 		{
 			CompoundNode* node = temp_queue.front();
 			temp_queue.pop();
-			
+
 			if (node->index == 0)
 			{
 				if (node->children.size() == 0)
-				{					
-					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " " << NodePresentTypeToInteger(node)<<" "<<0 << std::endl;
+				{
+					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " " << NodePresentTypeToInteger(node) << " " << 0 << std::endl;
 				}
 				else
-				{					
-					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " " <<0<<" "<< 0 << std::endl;
+				{
+					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " " << 0 << " " << 0 << std::endl;
 				}
 			}
 			else
@@ -267,7 +266,7 @@ void MainWindow::SaveGenerLayout()
 				}
 				else
 				{
-					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " "<<0<<" "<< transfer_index[node->parent->index] << std::endl;
+					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " " << 0 << " " << transfer_index[node->parent->index] << std::endl;
 				}
 			}
 
@@ -297,7 +296,7 @@ void MainWindow::SaveGenerLayout()
 				temp_queue.push(*iter);
 		}
 	}
-	
+
 	File_output << "equal space" << std::endl;
 	File_output << equal_space_number << std::endl;
 	if (root_display_layout)
@@ -312,7 +311,7 @@ void MainWindow::SaveGenerLayout()
 			if (node->equal_space_node.node_index.size() > 2)
 			{
 				for (int i = 0; i < node->equal_space_node.node_index.size(); i++)
-				{					
+				{
 					File_output << transfer_index[node->equal_space_node.node_index[i]] << " ";
 				}
 
@@ -323,7 +322,7 @@ void MainWindow::SaveGenerLayout()
 				else
 				{
 					File_output << 1 << " ";
-				}				
+				}
 
 				File_output << transfer_index[node->index] << std::endl;
 			}
@@ -346,9 +345,9 @@ void MainWindow::SaveGenerLayout()
 
 			if (node->left_align_node.size() >= 2)
 			{
-				for (int i=0;i< node->left_align_node.size();i++)
+				for (int i = 0; i < node->left_align_node.size(); i++)
 				{
-					File_output << transfer_index[node->left_align_node[i]] << " " ;
+					File_output << transfer_index[node->left_align_node[i]] << " ";
 				}
 				File_output << transfer_index[node->index] << std::endl;
 			}
@@ -433,9 +432,9 @@ void MainWindow::SaveGenerLayout()
 					{
 						File_output << transfer_index[node->bottom_align_node[i]] << " ";
 					}
-					File_output << transfer_index[node->index]<<std::endl;
-				}								
-			}			
+					File_output << transfer_index[node->index] << std::endl;
+				}
+			}
 			for (auto iter = node->children.begin(); iter != node->children.end(); iter++)
 				temp_queue.push(*iter);
 		}
@@ -445,7 +444,7 @@ void MainWindow::SaveGenerLayout()
 	return;
 }
 
-void MainWindow::BatchSaveLayoutAsSvg(int order)
+void LayoutExplorer::BatchSaveLayoutAsSvg(int order)
 {
 	QString fileName;
 	//对于批处理设一个固定的输出路径
@@ -470,10 +469,10 @@ void MainWindow::BatchSaveLayoutAsSvg(int order)
 	return;
 }
 
-int MainWindow::NodePresentTypeToInteger(CompoundNode * input_node)
+int LayoutExplorer::NodePresentTypeToInteger(CompoundNode * input_node)
 {
 	if (input_node == nullptr)
-	{		
+	{
 		return -1;
 	}
 
@@ -505,15 +504,15 @@ int MainWindow::NodePresentTypeToInteger(CompoundNode * input_node)
 	return -1;
 }
 
-void MainWindow::SaveGenerLayoutForBatch(int order)
-{	
+void LayoutExplorer::SaveGenerLayoutForBatch(int order)
+{
 	std::vector<int> transfer_index;
 	transfer_index.resize(500, 0);
 	int index_counter = 1;
 
 	QString fileName;
 	QString prefix = "C:/Users/Administrator/Desktop/SIGA2022/SameStructureWithoutSameLabel/change_part_labels/";
-	
+
 	QString num_to_qstring = QString::number(order, 10);
 	QString houzui = ".lay";
 	fileName = prefix + num_to_qstring + houzui;
@@ -521,7 +520,7 @@ void MainWindow::SaveGenerLayoutForBatch(int order)
 	std::fstream File_output;
 	File_output.open(fileName.toStdString(), std::fstream::out);
 	File_output << "node attribute" << std::endl;
-	
+
 	CompoundNode* root_display_layout = comb_tree_root_copy;
 	int node_number = 0, equal_size_number = 0, equal_space_number = 0, left_align_number = 0, right_align_number = 0, top_align_number = 0, bottom_align_number = 0;
 
@@ -577,15 +576,15 @@ void MainWindow::SaveGenerLayoutForBatch(int order)
 		{
 			CompoundNode* node = temp_queue.front();
 			temp_queue.pop();
-			
+
 			if (node->index == 0)
 			{
 				if (node->children.size() == 0)
-				{					
+				{
 					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " " << NodePresentTypeToInteger(node) << " " << 0 << std::endl;
 				}
 				else
-				{					
+				{
 					File_output << transfer_index[node->index] << " " << 0 << " " << 0 << " " << (int)node->x << " " << (int)node->y << " " << (int)node->width << " " << (int)node->height << " " << 0 << " " << 0 << std::endl;
 				}
 			}
@@ -779,7 +778,7 @@ void MainWindow::SaveGenerLayoutForBatch(int order)
 }
 
 
-void MainWindow::SetCompoundNodeLabel()
+void LayoutExplorer::SetCompoundNodeLabel()
 {
 	if (comb_tree_root_copy)
 	{
@@ -794,9 +793,9 @@ void MainWindow::SetCompoundNodeLabel()
 			if (node->children.size() == 0)
 			{
 				if (node->tree0_node != nullptr && node->tree1_node != nullptr)
-				{					
+				{
 					if (node->tree0_node->node_present_type == node->tree1_node->node_present_type)
-					{						
+					{
 						node->node_present_type = node->tree0_node->node_present_type;
 					}
 					else
@@ -805,11 +804,11 @@ void MainWindow::SetCompoundNodeLabel()
 					}
 				}
 				else if (node->tree0_node != nullptr && node->tree1_node == nullptr)
-				{					
+				{
 					node->node_present_type = node->tree0_node->node_present_type;
 				}
 				else
-				{					
+				{
 					node->node_present_type = node->tree1_node->node_present_type;
 				}
 
@@ -826,7 +825,7 @@ void MainWindow::SetCompoundNodeLabel()
 	return;
 }
 
-void MainWindow::SaveLayoutAsSvg()
+void LayoutExplorer::SaveLayoutAsSvg()
 {
 	QString fileName = QFileDialog::getSaveFileName(this, "Save", "", "SVG (*.svg)");
 
@@ -844,8 +843,8 @@ void MainWindow::SaveLayoutAsSvg()
 	}
 }
 
-void MainWindow::CopyTree()
-{	
+void LayoutExplorer::CopyTree()
+{
 	if (combine_tree_copy != nullptr)
 	{
 		delete combine_tree_copy;
@@ -858,7 +857,7 @@ void MainWindow::CopyTree()
 	return;
 }
 
-void MainWindow::DeterInterVar(double slider_value)
+void LayoutExplorer::DeterInterVar(double slider_value)
 {
 	layout_handler.SetCombineTreeRoot(comb_tree_root_copy);
 	layout_handler.DeterInterVariable(slider_value);

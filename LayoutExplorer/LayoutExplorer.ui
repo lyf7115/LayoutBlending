@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LayoutExplorerClass</class>
+ <widget class="QMainWindow" name="LayoutExplorerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1095</width>
+    <height>872</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LayoutExplorer</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="90,10">
+    <item>
+     <widget class="OutputWidget" name="output_widget" native="true"/>
+    </item>
+    <item>
+     <widget class="SliderWidget" name="slider_widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,3,1">
+       <item>
+        <spacer name="horizontalSpacerLeft">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>206</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QFloatSlider" name="horizontalSlider">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacerRight">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>206</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1095</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_Next_Layout"/>
+    <addaction name="actionSave_Layout"/>
+    <addaction name="actionSave_Layout_As_Svg"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionCompute"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen_Next_Layout"/>
+   <addaction name="actionCompute"/>
+  </widget>
+  <action name="actionOpen_Next_Layout">
+   <property name="icon">
+    <iconset>
+     <normaloff>Resources/ProjectIcon/OpenNextLayout.png</normaloff>Resources/ProjectIcon/OpenNextLayout.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Next Layout</string>
+   </property>
+  </action>
+  <action name="actionSave_Layout">
+   <property name="text">
+    <string>Save Layout</string>
+   </property>
+  </action>
+  <action name="actionSave_Layout_As_Svg">
+   <property name="text">
+    <string>Save Layout As Svg</string>
+   </property>
+  </action>
+  <action name="actionCompute">
+   <property name="icon">
+    <iconset>
+     <normaloff>Resources/ProjectIcon/ComputeIcon.png</normaloff>Resources/ProjectIcon/ComputeIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Compute</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>OutputWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">COutputWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SliderWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">CSliderWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QFloatSlider</class>
+   <extends>QSlider</extends>
+   <header location="global">CQfloatSlider.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="LayoutExplorer.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionOpen_Next_Layout</sender>
+   <signal>triggered()</signal>
+   <receiver>LayoutExplorerClass</receiver>
+   <slot>OpenNextLayout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>547</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_Layout</sender>
+   <signal>triggered()</signal>
+   <receiver>LayoutExplorerClass</receiver>
+   <slot>SaveGenerLayout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>547</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_Layout_As_Svg</sender>
+   <signal>triggered()</signal>
+   <receiver>LayoutExplorerClass</receiver>
+   <slot>SaveLayoutAsSvg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>547</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCompute</sender>
+   <signal>triggered()</signal>
+   <receiver>LayoutExplorerClass</receiver>
+   <slot>Compute()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>547</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OpenNextLayout()</slot>
+  <slot>Compute()</slot>
+  <slot>SaveGenerLayout()</slot>
+  <slot>SaveLayoutAsSvg()</slot>
+ </slots>
+</ui>

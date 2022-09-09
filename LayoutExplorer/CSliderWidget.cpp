@@ -1,6 +1,7 @@
 #include "CSliderWidget.h"
 
-SliderWidget::SliderWidget()
+SliderWidget::SliderWidget(QWidget* parent)
+	: QWidget(parent)
 {
 	
 }

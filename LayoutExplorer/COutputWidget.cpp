@@ -1,9 +1,11 @@
 #include "COutputWidget.h"
 #include<queue>
 
-OutputWidget::OutputWidget()
+OutputWidget::OutputWidget(QWidget *parent)
+	: QWidget(parent)
 {	
 	output_widget_tree = nullptr;
+	draw_layout_state = true;
 }
 
 OutputWidget::~OutputWidget()
@@ -17,8 +19,12 @@ void OutputWidget::paintEvent(QPaintEvent* event)
 
 	QPainter paint(this);
 	DrawFrame(paint);
-	DrawGrid(paint);
-	DrawLayout(paint);
+	DrawGrid(paint);	
+	if(draw_layout_state == true)
+	{
+		DrawLayout(paint);
+	}
+	
 }
 
 void OutputWidget::DrawFrame(QPainter& paint)

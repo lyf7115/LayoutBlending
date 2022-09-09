@@ -1,8 +1,9 @@
 #pragma once
 
-#include <iostream>
 #include <QtWidgets/QMainWindow>
-#include "ui_MainWindow.h"
+#include "ui_LayoutExplorer.h"
+
+#include <iostream>
 #include <Qdebug>
 #include "CSliderWidget.h"
 #include "COutputWidget.h"
@@ -18,13 +19,13 @@
 #include <QtCore/QObject>
 #include <QtGui/QtGui>
 
-class MainWindow : public QMainWindow
+class LayoutExplorer : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = Q_NULLPTR);
-	~MainWindow();
+	LayoutExplorer(QWidget *parent = Q_NULLPTR);
+	~LayoutExplorer();
 
 public slots:
 	void OutputWidgetRedraw();
@@ -47,7 +48,7 @@ private:
 	int NodePresentTypeToInteger(CompoundNode* input_node);
 
 private:
-	Ui::MainWindowClass ui;
+	Ui::LayoutExplorerClass ui;
 
 	Transfer layout_handler;
 	CLayoutTree* m_firstLayout;
@@ -59,5 +60,5 @@ private:
 	CompoundNode* comb_tree_root;
 	CompoundNode* comb_tree_root_copy;
 
-	std::vector<CLayoutTree*> m_uploadLayout;		
+	std::vector<CLayoutTree*> m_uploadLayout;
 };
