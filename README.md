@@ -32,6 +32,14 @@ these two applications are confirmed by the user feedback and the extensive resu
 If you find this useful for your research, please cite the following paper.
 
 ```
-Waiting for updating...
+@article{HierarchiLayout22,
+title = {Hierarchical Layout Blending with Recursive Optimal Correspondence},
+author = {Pengfei Xu and Yifan Li and Zhijin Yang and Weiran Shi and Hongbo Fu and Hui Huang*},
+journal = {ACM Transactions on Graphics (Proceedings of SIGGRAPH ASIA)},
+volume = {41},
+number = {6},
+pages = {249:1--249:15},
+year = {2022},
+}
 ```
 
